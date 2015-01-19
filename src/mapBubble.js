@@ -19,7 +19,6 @@
  * Author: Damián Nohales <damiannohales@gmail.com>
  */
 
-const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
@@ -37,7 +36,8 @@ const Button = {
     ROUTE: 2,
     SEND_TO: 4,
     FAVORITE: 8,
-    CHECK_IN: 16
+    CHECK_IN: 16,
+    EDIT: 32
 };
 
 const MapBubble = new Lang.Class({
@@ -68,17 +68,44 @@ const MapBubble = new Lang.Class({
         params.modal = false;
 
         this.parent(params);
-        let ui = Utils.getUIObject('map-bubble', [ 'bubble-main-grid',
+        let ui = Utils.getUIObject('map-bubble', [ 'stack',
+						   'bubble-main-grid',
+						   'bubble-edit-box',
+						   'bubble-edit-content-area',
                                                    'bubble-image',
                                                    'bubble-content-area',
                                                    'bubble-button-area',
                                                    'bubble-route-button',
                                                    'bubble-send-to-button',
                                                    'bubble-favorite-button',
-                                                   'bubble-check-in-button']);
+                                                   'bubble-check-in-button',
+						   'bubble-edit-button',
+						   'bubble-add-detail-button',
+						   'bubble-save-button',
+						   'bubble-cancel-button',
+						   'bubble-add-name-button',
+						   'bubble-add-wikipedia-button',
+						   'bubble-add-population-button',
+						   'bubble-add-wheelchair-button',
+						   'bubble-edit-comment-entry',
+						   'bubble-edit-label-size-group']);
+	this._viewOrEditStack = ui.stack;
+	this._mainGrid = ui.bubbleMainGrid;
+	this._editBox = ui.bubbleEditBox;
+	this._editContentArea = ui.bubbleEditContentArea;
         this._image = ui.bubbleImage;
         this._content = ui.bubbleContentArea;
-
+	this._editButton = ui.bubbleEditButton;
+	this._saveButton = ui.bubbleSaveButton;
+	this._cancelButton = ui.bubbleCancelButton;
+	this._addDetailButton = ui.bubbleAddDetailButton;
+	this._addNameButton = ui.bubbleAddNameButton;
+	this._addWikipediaButton = ui.bubbleAddWikipediaButton;
+	this._addPopulationButton = ui.bubbleAddPopulationButton;
+	this._addWheelchairButton = ui.bubbleAddWheelchairButton;
+	this._editCommentEntry = ui.bubbleEditCommentEntry;
+	this._editLabelSizeGroup = ui.bubbleEditLabelSizeGroup;
+	
         if (!buttonFlags)
             ui.bubbleButtonArea.visible = false;
         else {
@@ -90,9 +117,9 @@ const MapBubble = new Lang.Class({
                 this._initFavoriteButton(ui.bubbleFavoriteButton);
             if (buttonFlags & Button.CHECK_IN)
                 this._initCheckInButton(ui.bubbleCheckInButton, checkInMatchPlace);
-        }
+	}
 
-        this.add(ui.bubbleMainGrid);
+        this.add(ui.stack);
     },
 
     get image() {

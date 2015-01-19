@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="3.12"/>
+  <template class="Gjs_OSMEditDialog" parent="GtkDialog">
+    <property name="can_focus">False</property>
+    <property name="type">popup</property>
+    <property name="type_hint">dialog</property>
+    <property name="width_request">500</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="contentArea">
+        <child>
+          <object class="GtkStack" id="stack">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="homogeneous">True</property>
+            <property name="transition_type">crossfade</property>
+            <child>
+              <object class="GtkGrid" id="loadingGrid">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkSpinner" id="loadingSpinner">
+                    <property name="height_request">32</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="active">True</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">loading</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkGrid" id="editorGrid">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_start">15</property>
+                <property name="margin_end">15</property>
+                <property name="margin_top">15</property>
+                <property name="margin_bottom">15</property>
+                <child>
+                  <object class="GtkLabel" id="nameLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+		    <property name="label" translatable="true">Name</property>
+		  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                  </packing>
+                </child>
+		<child>
+                  <object class="GtkEntry" id="nameEntry">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+		  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">0</property>
+                  </packing>
+                </child>
+
+              </object>
+              <packing>
+                <property name="name">editor</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkGrid" id="uploadGrid">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_start">15</property>
+                <property name="margin_end">15</property>
+                <property name="margin_top">15</property>
+                <property name="margin_bottom">15</property>
+                <child>
+                  <object class="GtkLabel" id="commentLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+		    <property name="label" translatable="true">Comment:</property>
+		  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                  </packing>
+                </child>
+		<child>
+                  <object class="GtkEntry" id="commentEntry">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+		  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="sourceLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+		    <property name="label" translatable="true">Source:</property>
+		  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">1</property>
+                  </packing>
+                </child>
+		<child>
+                  <object class="GtkEntry" id="sourceEntry">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+		  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">1</property>
+                  </packing>
+                </child>
+
+              </object>
+              <packing>
+                <property name="name">upload</property>
+              </packing>
+            </child>
+
+
+	  </object>
+	</child>
+      </object>
+    </child>
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="headerBar">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="show-close-button">False</property>
+        <child>
+          <object class="GtkButton" id="cancelButton">
+            <property name="label" translatable="yes">_Cancel</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="use_underline">True</property>
+          </object>
+          <packing>
+            <property name="pack-type">start</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="saveButton">
+            <property name="label" translatable="yes">_Save</property>
+            <property name="visible">True</property>
+	    <property name="sensitive">False</property>
+            <property name="can_focus">True</property>
+            <property name="use_underline">True</property>
+            <style>
+              <class name="suggested-action"/>
+            </style>
+          </object>
+          <packing>
+            <property name="pack-type">end</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+
+  </template>
+</interface>
