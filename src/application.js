@@ -78,6 +78,20 @@ const Application = new Lang.Class({
 
         this.parent({ application_id: 'org.gnome.Maps' });
         this._connected = false;
+
+        this.add_main_option('geojson',
+                             0,
+                             GLib.OptionFlags.NONE,
+                             GLib.OptionArg.FILENAME,
+                             'A path to a local tiles directory structure',
+                             null);
+
+        this.connect('handle-local-options', (function(app, options) {
+            if (options.contains('geojson')) {
+                let variant = options.lookup_value('geojson', null);
+                this.geojson_file = variant.deep_unpack().toString();
+            }
+        }).bind(this));
     },
 
     _checkNetwork: function() {

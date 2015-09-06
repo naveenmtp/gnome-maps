@@ -15,8 +15,10 @@
     <file>foursquareGoaAuthorizer.js</file>
     <file>geoclue.js</file>
     <file>geocodeService.js</file>
+    <file>geoJSON.js</file>
     <file>http.js</file>
     <file>layersPopover.js</file>
+    <file>lineString.js</file>
     <file>location.js</file>
     <file>locationServiceNotification.js</file>
     <file>main.js</file>
@@ -35,6 +37,7 @@
     <file>placeListRow.js</file>
     <file>placeMarker.js</file>
     <file>placeStore.js</file>
+    <file>polygon.js</file>
     <file>route.js</file>
     <file>routeEntry.js</file>
     <file>routeQuery.js</file>
@@ -43,6 +46,7 @@
     <file>serviceBackend.js</file>
     <file>settings.js</file>
     <file>sendToDialog.js</file>
+    <file>shapeLayer.js</file>
     <file>sidebar.js</file>
     <file>socialPlace.js</file>
     <file>socialPlaceListBox.js</file>

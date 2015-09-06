@@ -25,10 +25,12 @@ const GObject = imports.gi.GObject;
 const Geocode = imports.gi.GeocodeGlib;
 const GtkChamplain = imports.gi.GtkChamplain;
 const Lang = imports.lang;
+const Mainloop = imports.mainloop;
 
 const Application = imports.application;
 const ContactPlace = imports.contactPlace;
 const Geoclue = imports.geoclue;
+const GeoJSON = imports.geoJSON;
 const Location = imports.location;
 const MapWalker = imports.mapWalker;
 const Place = imports.place;
@@ -87,6 +89,17 @@ const MapView = new Lang.Class({
                                     this._updateUserLocation.bind(this));
 
         this._connectRouteSignals();
+
+        Mainloop.timeout_add(1000, (function() {
+            this._geoJSON = new GeoJSON.GeoJSON({
+                filename: Application.application.geojson_file,
+                mapView: this });
+
+            if (this._geoJSON.parse()) {
+                this._geoJSON.render();
+                this._gotoBBox(this._geoJSON.bbox);
+            }
+        }).bind(this));
     },
 
     _initView: function() {
